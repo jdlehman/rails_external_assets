@@ -1,8 +1,21 @@
+[![Gem Version](https://badge.fury.io/rb/rails_external_assets.png)](http://badge.fury.io/rb/rails_external_assets)
+[![Build Status](https://secure.travis-ci.org/jdlehman/rails_external_assets.svg?branch=master)](http://travis-ci.org/jdlehman/rails_external_assets)
+
 # RailsExternalAssets
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rails_external_assets`. To experiment with that code, run `bin/console` for an interactive prompt.
+RailsExternalAssets allows you to use the frontend build tool of your choice ([webpack](https://webpack.github.io/), [jspm](http://jspm.io/), [browserify](http://browserify.org/) etc) with Rails. Essentially you can build all (or some) of your frontend assets outside of Rails' asset pipeline, but still make use of them in Rails. The only requirement is that you provide an asset manifest file, which is a json file that maps your asset files to their final built files:
 
-TODO: Delete this and the text above, and describe your gem
+```json
+{
+  "js/module.js": "builds/js/module-12312abc.js",
+  "js/react-component.jsx": "builds/components/react-component-ab123x.js",
+  "css/styling.sass": "builds/styles/styling-129xha.css"
+}
+```
+
+This means you can manage your frontend assets however you like and RailsExternalAssets gives you [Rails](http://rubyonrails.org/) view helpers and [Sprockets](https://github.com/rails/sprockets) directives to incorporate these external assets into your Rails application.
+
+You can use RailsExternalAssets without using Ruby on Rails, but you will have to wire up the helper methods it provides into your application yourself.
 
 ## Installation
 
@@ -22,7 +35,99 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+## With Rails
+
+You can include your external assets in Rails with the provided view helpers or Sprockets directives.
+
+### View Helpers
+
+#### JavaScript
+
+You can include a JavaScript file with `external_asset_js`. Note that the name of the file MUST include the file extension and the file name is the key in the asset manifest JSON file.
+
+```erb
+<%= external_asset_js 'myFile.js' %>
+```
+
+#### CSS
+
+You can include a CSS file with `external_asset_css`. Note that the name of the file MUST include the file extension and the file name is the key in the asset manifest JSON file.
+
+```erb
+<%= external_asset_css 'myFile.sass' %>
+```
+
+#### Image
+
+You can include a Image file with `external_asset_img`. Note that the name of the file MUST include the file extension and the file name is the key in the asset manifest JSON file.
+
+```erb
+<%= external_asset_img 'myFile.jpg' %>
+```
+
+### Sprockets Directives
+
+By default, you can use the `external_require` directive in JavaScript and CSS manifest files, but you can add more (Sass, SCSS, CoffeeScript, etc) by setting the configuration (check out the configuration docks for `sprockets_directives`).
+
+In any file type you configure the Sprockets directive to be available in you, can use the `external_require` directive to include an external asset in the Sprockets manifest. Note that you MUST specify the file extension when using `external_require`.
+
+An example `application.js` Sprockets manifest file:
+
+```js
+//= require normalAsset
+//= require more/anotherAsset.js
+//= external_require externals/firstAsset.js
+//= external_require externals/anotherAsset.js
+```
+
+This will include the first two JS assets, `normalAsset` and `anotherAsset` from Rails' asset pipeline, and the last two JS assets, `firstAsset` and `anotherAsset` from your external assets. The external assets are resolved by looking up these files in the asset manifest JSON file provided.
+
+## With Plain Ruby
+
+RailsExternalAssets::AssetFinder provides two methods for your disposal.
+
+`asset_path` takes a path to an external asset file, and returns the corresponding built asset path by looking up the key in the asset manifest JSON file.
+
+`exeternal_asset` takes a path and returns the built asset path (the result of `asset_path`) and joins it with the base path. If a block is provided, the external asset path is passed to the block and the resulting value is returned.
+
+## Configuration
+
+Configuration settings can be modified within the `RailsExternalAssets.configure` block. Or set directly off of `RailsExternalAssets.config`
+
+```ruby
+RailsExternalAssets.configure do |config|
+  config.base_path = '/assets/'
+  config.manifest_file = 'public/assets/asset-manifest.json'
+end
+
+RailsExternalAssets.config.base_path = '/webpack-assets/'
+```
+
+### Options
+
+**base_path**
+
+This is the file location off of Rails' `public/` folder that the external assets are built to.
+
+> Defaults to `/external-assets/`
+
+**manifest_file**
+
+This is the file location of the asset manifest JSON file. The keys are the file paths pre-build, and the values are the file paths post-build.
+
+> Defaults to `public/external-assets/manfest.json`
+
+**sprockets_directives**
+
+This is an array to configure the use of the `external_assets` Sprockets directive that is provided by RailsExternalAssets. Each item is a hash with keys for `mime_type` and the `comments` supported by the directive. Check out the [Sprockets documentation](https://github.com/rails/sprockets/blob/master/guides/extending_sprockets.md#adding-directives-to-your-extension) for more information.
+
+> Defaults to:
+```ruby
+[
+  { mime_type: 'application/javascript', comments: ['//', ['/*', '*/']] },
+  { mime_type: 'application/css', comments: ['//', ['/*', '*/']] }
+]
+```
 
 ## Development
 
@@ -32,7 +137,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rails_external_assets. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/jdlehman/rails_external_assets. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License

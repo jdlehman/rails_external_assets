@@ -5,7 +5,11 @@ describe RailsExternalAssets do
     expect(RailsExternalAssets::VERSION).not_to be nil
   end
 
-  it 'does something useful' do
-    expect(false).to eq(true)
+  it 'has a configuration class' do
+    expect(RailsExternalAssets::Configuration).not_to be nil
+  end
+
+  it 'has a AssetFinder module' do
+    expect(RailsExternalAssets::AssetFinder).not_to be nil
   end
 end

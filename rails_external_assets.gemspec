@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jonathan Lehman"]
   spec.email         = ["jonathan.lehman91@gmail.com"]
 
-  spec.summary       = %q{Use external assets (those outside of Sprockets' asset pipeline) in Rails.}
-  spec.description   = %q{Use external assets (those outside of Sprockets' asset pipeline) in Rails.}
+  spec.summary       = %q{Use external assets, those built outside of Sprockets' asset pipeline, in Rails. This allows you to build frontend assets using any build tools, but still provide these assets to a Rails application.}
+  spec.description   = %q{Use external assets, frontend assets built with another build tool outside of Sprockets' asset pipeline, in Rails.}
   spec.homepage      = "http://github.com/jdlehman/rails_external_assets"
   spec.license       = "MIT"
 

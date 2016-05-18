@@ -1,0 +1,5 @@
+{
+  "raw/first.js": "built/first.min.js",
+  "raw/second.js": "built/second.js",
+  "raw/stylez.scss": "built/styles/stylez.css"
+}
