@@ -3,7 +3,7 @@
 
 # RailsExternalAssets
 
-RailsExternalAssets allows you to use the frontend build tool of your choice ([webpack](https://webpack.github.io/), [jspm](http://jspm.io/), [browserify](http://browserify.org/) etc) with Rails. Essentially you can build all (or some) of your frontend assets outside of Rails' asset pipeline, but still make use of them in Rails. The only requirement is that you provide an asset manifest file, which is a json file that maps your asset files to their final built files:
+RailsExternalAssets allows you to use the frontend build tool of your choice ([webpack](https://webpack.github.io/), [jspm](http://jspm.io/), [browserify](http://browserify.org/), etc) with Rails. Essentially you can build all (or some) of your frontend assets outside of Rails' asset pipeline, but still make use of them in Rails. The only requirement is that you provide an asset manifest file, which is a json file that maps your asset files to their final built files:
 
 ```json
 {
