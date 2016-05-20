@@ -9,7 +9,8 @@ RailsExternalAssets allows you to use the frontend build tool of your choice ([w
 {
   "js/module.js": "builds/js/module-12312abc.js",
   "js/react-component.jsx": "builds/components/react-component-ab123x.js",
-  "css/styling.sass": "builds/styles/styling-129xha.css"
+  "css/styling.sass": "builds/styles/styling-129xha.css",
+  "pathToPreBuiltAsset": "pathToBuiltAsset"
 }
 ```
 
