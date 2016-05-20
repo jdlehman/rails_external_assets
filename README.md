@@ -13,7 +13,7 @@ RailsExternalAssets allows you to use the frontend build tool of your choice ([w
 }
 ```
 
-This means you can manage your frontend assets however you like and RailsExternalAssets gives you [Rails](http://rubyonrails.org/) view helpers and [Sprockets](https://github.com/rails/sprockets) directives to incorporate these external assets into your Rails application.
+This means you can manage your frontend assets however you like and RailsExternalAssets gives you [Rails](http://rubyonrails.org/) view helpers and [Sprockets](https://github.com/rails/sprockets) directives to incorporate these external assets into your Rails application. In Rails environments, RailsExternalAssets also hooks into `assets:precompile` and `assets:clobber` Rake tasks.
 
 You can use RailsExternalAssets without using Ruby on Rails, but you will have to wire up the helper methods it provides into your application yourself.
 
@@ -38,6 +38,8 @@ Or install it yourself as:
 ## With Rails
 
 You can include your external assets in Rails with the provided view helpers or Sprockets directives.
+
+RailsExternalAssets will also hook into the `assets:precompile` Rake command and run the shell script defined by the `build_script` config. It will also hook into the `assets:clobber` Rake command and remove all the files in the directory specified by your `base_path` config (where your assets are built).
 
 ### View Helpers
 
@@ -128,6 +130,14 @@ This is an array to configure the use of the `external_assets` Sprockets directi
   { mime_type: 'application/css', comments: ['//', ['/*', '*/']] }
 ]
 ```
+
+**build_script**
+
+This is the shell script that will be run prior to `assets:precompile` in Rails or with the `rake assets:build_external_assets` command. This should be the script that builds your assets (eg: `npm run build`).
+
+Note that in a Rails environment, `assets:clobber` will also remove all the files in your `base_path` directory (where your assets are built).
+
+> Defaults to `echo "You did not define a build script"`
 
 ## Development
 

@@ -1,6 +1,10 @@
 module RailsExternalAssets
   module Rails
     class Railtie < ::Rails::Railtie
+      rake_tasks do
+        load 'rails_external_assets/tasks/assets.rake'
+      end
+
       initializer 'rails_external_assets.initialize' do |app|
         ActionView::Base.send :include, ViewHelpers
 

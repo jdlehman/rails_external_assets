@@ -18,7 +18,8 @@ module RailsExternalAssets
   class Configuration
     attr_accessor :base_path,
                   :manifest_file,
-                  :sprockets_directives
+                  :sprockets_directives,
+                  :build_script
 
     def initialize
       # base path should be off Rails public/
@@ -28,6 +29,7 @@ module RailsExternalAssets
         { mime_type: 'application/javascript', comments: ['//', ['/*', '*/']] },
         { mime_type: 'application/css', comments: ['//', ['/*', '*/']] }
       ]
+      @build_script = 'echo "You did not define a build script"'
     end
   end
 end
