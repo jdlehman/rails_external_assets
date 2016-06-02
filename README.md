@@ -46,7 +46,7 @@ RailsExternalAssets will also hook into the `assets:precompile` Rake command and
 
 #### JavaScript
 
-You can include a JavaScript file with `external_asset_js`. Note that the string argument must correspond to an entry in the manifest file, including the file extension.
+You can include a JavaScript file with `external_asset_js`. Note that the string argument must correspond to an entry in the manifest file, including the file extension. If you do not include a file extension, `js` will be used by default.
 
 ```erb
 <%= external_asset_js 'myFile.js' %>
@@ -54,7 +54,7 @@ You can include a JavaScript file with `external_asset_js`. Note that the string
 
 #### CSS
 
-You can include a CSS file with `external_asset_css`. Note that the string argument must correspond to an entry in the manifest file, including the file extension.
+You can include a CSS file with `external_asset_css`. Note that the string argument must correspond to an entry in the manifest file, including the file extension. If you do not include a file extension, `css` will be used by default.
 
 ```erb
 <%= external_asset_css 'myFile.css' %>
