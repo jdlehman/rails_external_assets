@@ -8,12 +8,15 @@ module RailsExternalAssets
     end
 
     def asset_path(path)
+      new_path = asset_manifest[path]
+      throw_unknown_path(path, RailsExternalAssets.config.manifest_file) unless new_path
+      new_path
+    end
+
+    def asset_manifest
       manifest_file = RailsExternalAssets.config.manifest_file
       throw_invalid_manifest(manifest_file) unless File.file? manifest_file
-      asset_manifest = JSON.parse(File.read manifest_file)
-      new_path = asset_manifest[path]
-      throw_unknown_path(path, manifest_file) unless new_path
-      new_path
+      JSON.parse(File.read manifest_file)
     end
 
 

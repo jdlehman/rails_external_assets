@@ -60,4 +60,19 @@ describe RailsExternalAssets::AssetFinder do
       end
     end
   end
+
+  describe '#asset_manifest' do
+    it 'returns JSON asset manifest' do
+      expect(asset_finder.asset_manifest).to eq ({
+        'raw/first.js' => 'built/first.min.js',
+        'raw/second.js' => 'built/second.js',
+        'raw/stylez.scss' => 'built/styles/stylez.css'
+      })
+    end
+
+    it 'throws an error when manifest is invalid' do
+      RailsExternalAssets.config.manifest_file = 'spec/dummy/assets/'
+      expect{asset_finder.asset_manifest}.to raise_error(RailsExternalAssets::Errors::InvalidManifestFile)
+    end
+  end
 end

@@ -72,7 +72,9 @@ You can include a Image file with `external_asset_img`. Note that the string arg
 
 By default, you can use the `external_require` directive in JavaScript and CSS manifest files, but you can add more (Sass, SCSS, CoffeeScript, etc) by setting the configuration (check out the configuration docks for `sprockets_directives`).
 
-In any file type you configure the Sprockets directive to be available in you, can use the `external_require` directive to include an external asset in the Sprockets manifest. If you do not include an extension, Sprockets will try to use an extension based on the extension of the file you required it in. Sprockets will also ensure that each file is only included once, even if directives overlap and require the file more than once.
+In any file type you configure the Sprockets directive to be available in you, can use the `external_require` directives to include an external asset in the Sprockets manifest. If you do not include an extension, Sprockets will try to use an extension based on the extension of the file you required it in. Sprockets will also ensure that each file is only included once, even if directives overlap and require the file more than once.
+
+The available directives are, `external_require`, `external_require_directory`, and `external_require_tree`, corresponding to the build in directives, `require`, `require_directory`, and `require_tree`.
 
 An example `application.js` Sprockets manifest file:
 
@@ -81,17 +83,21 @@ An example `application.js` Sprockets manifest file:
 //= require more/anotherAsset
 //= external_require externals/firstAsset
 //= external_require externals/anotherAsset
+//= external_require_directory externals/myFolder
+//= external_require_tree externals/folderWithMoreFolders
 ```
 
-This will include the first two JS assets, `normalAsset` and `anotherAsset` from Rails' asset pipeline, and the last two JS assets, `firstAsset` and `anotherAsset` from your external assets. The external assets are resolved by looking up these files in the asset manifest JSON file provided.
+This will include the first two JS assets, `normalAsset` and `anotherAsset` from Rails' asset pipeline, and the other JS assets, `firstAsset`, `anotherAsset`, all JS files directly in `externals/myFolder`, and all JS files in the tree `externals/folderWithMoreFolders` from your external assets. The external assets are resolved by looking up these files in the asset manifest JSON file provided.
 
 ## With Plain Ruby
 
-`RailsExternalAssets::AssetFinder` provides two methods for your disposal.
+`RailsExternalAssets::AssetFinder` provides three methods for your disposal.
 
 `asset_path` takes a path to an external asset file, and returns the corresponding built asset path by looking up the key in the asset manifest JSON file.
 
 `exeternal_asset` takes a path and returns the built asset path (the result of `asset_path`) and joins it with the base path. If a block is provided, the external asset path is passed to the block and the resulting value is returned.
+
+`asset_manifest` is used by `asset_path`, and returns the asset manifest file parsed as JSON.
 
 ## Configuration
 

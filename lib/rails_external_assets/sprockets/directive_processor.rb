@@ -10,6 +10,20 @@ module RailsExternalAssets
          process_require_directive new_path
        end
 
+       def process_external_require_directory_directive(path)
+         selected_paths = asset_manifest.keys
+          .select { |key| key.match "#{File.join(path, '[^/]+\..+')}" }
+          .select { |path| File.extname(path) == file_extension }
+         selected_paths.each { |path| process_external_require_directive path }
+       end
+
+       def process_external_require_tree_directive(path)
+         selected_paths = asset_manifest.keys
+          .select { |key| key.match File.join(path) }
+          .select { |path| File.extname(path) == file_extension }
+         selected_paths.each { |path| process_external_require_directive path }
+       end
+
 
        private
 
