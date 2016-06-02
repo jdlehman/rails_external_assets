@@ -4,8 +4,18 @@ module RailsExternalAssets
       include RailsExternalAssets::AssetFinder
 
        def process_external_require_directive(path)
-         new_path = asset_path(path)
+         ext_name = File.extname(path)
+         ext = ext_name.empty? ? file_extension : ''
+         new_path = asset_path("#{path}#{ext}")
          process_require_directive new_path
+       end
+
+
+       private
+
+       def file_extension
+         mime_ext = @environment.mime_exts.find { |_, value| value == @content_type }
+         mime_ext && mime_ext[0]
        end
     end
   end

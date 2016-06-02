@@ -46,7 +46,7 @@ RailsExternalAssets will also hook into the `assets:precompile` Rake command and
 
 #### JavaScript
 
-You can include a JavaScript file with `external_asset_js`. Note that the name of the file MUST include the file extension and the file name is the key in the asset manifest JSON file.
+You can include a JavaScript file with `external_asset_js`. Note that the string argument must correspond to an entry in the manifest file, including the file extension.
 
 ```erb
 <%= external_asset_js 'myFile.js' %>
@@ -54,15 +54,15 @@ You can include a JavaScript file with `external_asset_js`. Note that the name o
 
 #### CSS
 
-You can include a CSS file with `external_asset_css`. Note that the name of the file MUST include the file extension and the file name is the key in the asset manifest JSON file.
+You can include a CSS file with `external_asset_css`. Note that the string argument must correspond to an entry in the manifest file, including the file extension.
 
 ```erb
-<%= external_asset_css 'myFile.sass' %>
+<%= external_asset_css 'myFile.css' %>
 ```
 
 #### Image
 
-You can include a Image file with `external_asset_img`. Note that the name of the file MUST include the file extension and the file name is the key in the asset manifest JSON file.
+You can include a Image file with `external_asset_img`. Note that the string argument must correspond to an entry in the manifest file, including the file extension.
 
 ```erb
 <%= external_asset_img 'myFile.jpg' %>
@@ -72,15 +72,15 @@ You can include a Image file with `external_asset_img`. Note that the name of th
 
 By default, you can use the `external_require` directive in JavaScript and CSS manifest files, but you can add more (Sass, SCSS, CoffeeScript, etc) by setting the configuration (check out the configuration docks for `sprockets_directives`).
 
-In any file type you configure the Sprockets directive to be available in you, can use the `external_require` directive to include an external asset in the Sprockets manifest. Note that you MUST specify the file extension when using `external_require`.
+In any file type you configure the Sprockets directive to be available in you, can use the `external_require` directive to include an external asset in the Sprockets manifest. If you do not include an extension, Sprockets will try to use an extension based on the extension of the file you required it in. Sprockets will also ensure that each file is only included once, even if directives overlap and require the file more than once.
 
 An example `application.js` Sprockets manifest file:
 
 ```js
 //= require normalAsset
-//= require more/anotherAsset.js
-//= external_require externals/firstAsset.js
-//= external_require externals/anotherAsset.js
+//= require more/anotherAsset
+//= external_require externals/firstAsset
+//= external_require externals/anotherAsset
 ```
 
 This will include the first two JS assets, `normalAsset` and `anotherAsset` from Rails' asset pipeline, and the last two JS assets, `firstAsset` and `anotherAsset` from your external assets. The external assets are resolved by looking up these files in the asset manifest JSON file provided.
