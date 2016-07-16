@@ -1,3 +1,8 @@
+PATH
+  remote: ../..
+  specs:
+    rails_external_assets (0.3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -148,6 +153,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   rails (= 4.2.6)
+  rails_external_assets!
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring

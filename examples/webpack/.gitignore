@@ -15,3 +15,8 @@
 /log/*
 !/log/.keep
 /tmp
+
+# ignore but make sure you run `rake assets:precompile` before deploying
+public/webpack-assets
+node_modules
+.npm-debug.log
