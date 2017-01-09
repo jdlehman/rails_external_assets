@@ -134,7 +134,7 @@ This is an array to configure the use of the `external_assets` Sprockets directi
 ```ruby
 [
   { mime_type: 'application/javascript', comments: ['//', ['/*', '*/']] },
-  { mime_type: 'application/css', comments: ['//', ['/*', '*/']] }
+  { mime_type: 'text/css', comments: ['//', ['/*', '*/']] }
 ]
 ```
 

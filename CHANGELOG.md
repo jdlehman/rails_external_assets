@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.1 (2017-1-9)
+
+Fixed:
+
+- Fixed default `sprockets_directives` config. `application/css` is the incorrect mime type, and it should be `text/css`. [3c6ea98](../../commit/3c6ea98)
+
 ## 0.3.0 (2016-6-2)
 
 Added:
