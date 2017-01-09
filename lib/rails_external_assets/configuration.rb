@@ -27,7 +27,7 @@ module RailsExternalAssets
       @manifest_file = 'public/external-assets/manifest.json'
       @sprockets_directives = [
         { mime_type: 'application/javascript', comments: ['//', ['/*', '*/']] },
-        { mime_type: 'application/css', comments: ['//', ['/*', '*/']] }
+        { mime_type: 'text/css', comments: ['//', ['/*', '*/']] }
       ]
       @build_script = 'echo "You did not define a build script"'
     end

@@ -33,7 +33,7 @@ describe RailsExternalAssets::Configuration do
       expect(config.manifest_file).to eq 'public/external-assets/manifest.json'
       expect(config.sprockets_directives).to eq [
         { mime_type: 'application/javascript', comments: ['//', ['/*', '*/']] },
-        { mime_type: 'application/css', comments: ['//', ['/*', '*/']] }
+        { mime_type: 'text/css', comments: ['//', ['/*', '*/']] }
       ]
     end
   end
