@@ -91,7 +91,7 @@ This will include the first two JS assets, `normalAsset` and `anotherAsset` from
 
 ## With Plain Ruby
 
-`RailsExternalAssets::AssetFinder` provides three methods for your disposal.
+The `RailsExternalAssets::AssetFinder` class provides three class methods for your disposal.
 
 `asset_path` takes a path to an external asset file, and returns the corresponding built asset path by looking up the key in the asset manifest JSON file.
 
