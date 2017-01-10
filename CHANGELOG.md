@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.0 (2017-1-10)
+
+Fixed:
+
+- Sprockets methods like `asset_path` are no longer accidentally overloaded by methods in the `RailsExternalAssets::AssetFinder` module. [a426a4d](../../commit/a426a4d)
+
+Changed:
+
+- The `RailsExternalAssets::AssetFinder` is now a class instead of a module. The method names are the same as they were in the module, but they are now class methods. This won't break anything unless you were manually using the module yourself. [a426a4d](../../commit/a426a4d)
+
 ## 0.3.1 (2017-1-9)
 
 Fixed:
