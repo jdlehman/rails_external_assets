@@ -124,7 +124,7 @@ This is the file location off of Rails' `public/` folder that the external asset
 
 This is the file location of the asset manifest JSON file. The keys are the file paths pre-build, and the values are the file paths post-build.
 
-> Defaults to `public/external-assets/manfest.json`
+> Defaults to `public/external-assets/manifest.json`
 
 **sprockets_directives**
 
