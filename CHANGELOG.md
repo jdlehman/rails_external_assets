@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.0 (2018-4-24)
+
+Added:
+
+- Manifest file is now cached to prevent reads on each asset lookup. [868e707](../../commit/868e707)
+
 ## 0.4.0 (2017-1-10)
 
 Fixed:
