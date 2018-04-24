@@ -9,6 +9,7 @@ describe RailsExternalAssets::AssetFinder do
   end
   after(:each) do
     RailsExternalAssets.reset
+    RailsExternalAssets::AssetFinder.clear_manifest_cache
   end
 
   describe '#asset_path' do

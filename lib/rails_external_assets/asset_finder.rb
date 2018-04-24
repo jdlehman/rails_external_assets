@@ -2,6 +2,7 @@ require 'json'
 
 module RailsExternalAssets
   class AssetFinder
+    @@manifest_file = nil
     class << self
       def external_asset(path)
         external_path = File.join(RailsExternalAssets.config.base_path, asset_path(path))
@@ -15,11 +16,15 @@ module RailsExternalAssets
       end
 
       def asset_manifest
+        return @@manifest_file unless @@manifest_file.nil?
         manifest_file = RailsExternalAssets.config.manifest_file
         throw_invalid_manifest(manifest_file) unless File.file? manifest_file
-        JSON.parse(File.read manifest_file)
+        @@manifest_file = JSON.parse(File.read manifest_file)
       end
 
+      def clear_manifest_cache
+        @@manifest_file = nil
+      end
 
       private
 

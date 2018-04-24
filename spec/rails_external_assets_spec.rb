@@ -9,7 +9,7 @@ describe RailsExternalAssets do
     expect(RailsExternalAssets::Configuration).not_to be nil
   end
 
-  it 'has a AssetFinder module' do
+  it 'has a AssetFinder class' do
     expect(RailsExternalAssets::AssetFinder).not_to be nil
   end
 end
