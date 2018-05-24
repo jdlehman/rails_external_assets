@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.0 (2018-5-24)
+
+Added:
+
+- Option `cache_manifest` to specify whether or not to cache the manifest. This can now be set to false to handle manifest changes in development. [714b51c](../../commit/714b51c)
+
 ## 0.5.0 (2018-4-24)
 
 Added:
