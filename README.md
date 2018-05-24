@@ -146,6 +146,12 @@ Note that in a Rails environment, `assets:clobber` will also remove all the file
 
 > Defaults to `echo "You did not define a build script"`
 
+**cache_manifest**
+
+This is specifies whether the manifest should be cached. This should probably be false for development and true in production.
+
+> Defaults to `true`
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

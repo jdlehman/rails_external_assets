@@ -9,8 +9,7 @@ describe RailsExternalAssets::Configuration do
     end
   end
 
-  describe '.reset' do
-    it 'resets config' do
+  describe '.reset' do it 'resets config' do
       RailsExternalAssets.config.base_path = 'test'
       RailsExternalAssets.reset
       expect(RailsExternalAssets.config.base_path).not_to eq 'test'
@@ -35,6 +34,7 @@ describe RailsExternalAssets::Configuration do
         { mime_type: 'application/javascript', comments: ['//', ['/*', '*/']] },
         { mime_type: 'text/css', comments: ['//', ['/*', '*/']] }
       ]
+      expect(config.cache_manifest).to eq true
     end
   end
 end

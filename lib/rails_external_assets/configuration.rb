@@ -8,8 +8,7 @@ module RailsExternalAssets
   end
 
   def self.reset
-    @config = Configuration.new
-  end
+    @config = Configuration.new end
 
   def self.configure
     yield(config)
@@ -19,7 +18,8 @@ module RailsExternalAssets
     attr_accessor :base_path,
                   :manifest_file,
                   :sprockets_directives,
-                  :build_script
+                  :build_script,
+                  :cache_manifest
 
     def initialize
       # base path should be off Rails public/
@@ -30,6 +30,7 @@ module RailsExternalAssets
         { mime_type: 'text/css', comments: ['//', ['/*', '*/']] }
       ]
       @build_script = 'echo "You did not define a build script"'
+      @cache_manifest = true
     end
   end
 end

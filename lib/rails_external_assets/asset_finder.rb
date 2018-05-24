@@ -16,7 +16,7 @@ module RailsExternalAssets
       end
 
       def asset_manifest
-        return @@manifest_file unless @@manifest_file.nil?
+        return @@manifest_file if @@manifest_file && RailsExternalAssets.config.cache_manifest
         manifest_file = RailsExternalAssets.config.manifest_file
         throw_invalid_manifest(manifest_file) unless File.file? manifest_file
         @@manifest_file = JSON.parse(File.read manifest_file)
